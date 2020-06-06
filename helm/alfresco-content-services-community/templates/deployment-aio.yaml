@@ -12,6 +12,9 @@ metadata:
     component: transformers
 spec:
   replicas: {{ .Values.aio.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "content-services.shortname" . }}-aio
   template:
     metadata:
       labels:
