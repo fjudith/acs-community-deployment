@@ -1,6 +1,6 @@
 # Defines the deployment for the aio transformer app
 # Details: https://git.alfresco.com/Repository/alfresco-docker-transformers
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "content-services.shortname" . }}-aio
@@ -56,6 +56,7 @@ spec:
           ports:
             - containerPort: {{ .Values.aio.image.internalPort }}
           resources:
+{{ toYaml .Values.tika.resources | indent 12 }}
           readinessProbe:
             httpGet:
               path: /ready
